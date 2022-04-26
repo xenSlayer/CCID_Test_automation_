@@ -11,13 +11,12 @@ enum DBOperation
 
 namespace CCID_Test_automation_.core
 {
-
     class DBConnection
     {
         public static dynamic ExecuteQuery(DBOperation dbOperation, string query)
         {
             // connection string
-            // look [./core/Constants.cs] for connection string and other constants
+            // ./core/Constants.cs for connection string and other constants
             string connetionString = Constants.ConnectionString();
 
             // create a connection to the sql server with 'connectionString' containing ID and password

@@ -87,7 +87,7 @@ namespace CCID_Test_automation_.Features
             }
             string[] tagsOfScenario = @__tags;
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify user address created", null, @__tags);
-#line 7
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -108,21 +108,21 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "name",
+                            "Name",
                             "age"});
                 table1.AddRow(new string[] {
                             "kiran",
                             "100"});
-#line 10
+#line 9
  testRunner.Given("insert operation to the database is successful", ((string)(null)), table1, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "name",
+                            "Name",
                             "age"});
                 table2.AddRow(new string[] {
                             "kiran",
                             "100"});
-#line 14
+#line 13
  testRunner.Then("validate the data is inserted successfully", ((string)(null)), table2, "Then ");
 #line hidden
             }

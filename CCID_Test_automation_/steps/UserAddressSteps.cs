@@ -1,5 +1,7 @@
 ﻿using CCID_Test_automation_.core;
+using NUnit.Framework;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace CCID_Test_automation_.steps
 {
@@ -20,7 +22,13 @@ namespace CCID_Test_automation_.steps
         {
             string query = "Select * FROM ";
             // Here the select opeartion to the database is done
-            DBConnection.ExecuteQuery(DBOperation.Insert, query);
+            DBConnection.ExecuteQuery(DBOperation.Select, query);
+
+            // get the table data
+            dynamic data = table.CreateDynamicInstance();
+
+            // validate the table data
+            Assert.That((string)data.Name == "kiran");
         }
     }
 }
