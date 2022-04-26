@@ -4,13 +4,16 @@ Feature: UserAddress
 	Validate user address insert opeartion in the database
 
 @mytag
-Scenario: Perform user address insert operation in the database
+Scenario: Verify user address created
 	# steps for performing the tests
 	# should reflect the steps in order and in plain english
-	Given insert user address to database
-	When insert to the database is successful
-	Then should get the inserted data from the database
-	Then should insert "12" to database
+	Given insert operation to the database is successful
+		| name  | age |
+		| kiran | 100 |
+
+	Then validate the data is inserted successfully
+		| name  | age |
+		| kiran | 100 |
 
 	Examples: 
 	| name  | age |

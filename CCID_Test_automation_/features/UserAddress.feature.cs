@@ -74,10 +74,10 @@ namespace CCID_Test_automation_.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Perform user address insert operation in the database")]
+        [NUnit.Framework.DescriptionAttribute("Verify user address created")]
         [NUnit.Framework.CategoryAttribute("mytag")]
         [NUnit.Framework.TestCaseAttribute("kiran", "100", null)]
-        public virtual void PerformUserAddressInsertOperationInTheDatabase(string name, string age, string[] exampleTags)
+        public virtual void VerifyUserAddressCreated(string name, string age, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "mytag"};
@@ -86,7 +86,7 @@ namespace CCID_Test_automation_.Features
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             string[] tagsOfScenario = @__tags;
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Perform user address insert operation in the database", null, @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify user address created", null, @__tags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -107,17 +107,23 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "name",
+                            "age"});
+                table1.AddRow(new string[] {
+                            "kiran",
+                            "100"});
 #line 10
- testRunner.Given("insert user address to database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("insert operation to the database is successful", ((string)(null)), table1, "Given ");
 #line hidden
-#line 11
- testRunner.When("insert to the database is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 12
- testRunner.Then("should get the inserted data from the database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 13
- testRunner.Then("should insert \"12\" to database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "name",
+                            "age"});
+                table2.AddRow(new string[] {
+                            "kiran",
+                            "100"});
+#line 14
+ testRunner.Then("validate the data is inserted successfully", ((string)(null)), table2, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

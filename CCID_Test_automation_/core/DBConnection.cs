@@ -14,49 +14,54 @@ namespace CCID_Test_automation_.core
 
     class DBConnection
     {
-        // create a connection to the database
-        public static void ExecuteQuery(DBOperation dbOperation, string query)
+        public static dynamic ExecuteQuery(DBOperation dbOperation, string query)
         {
-            string connetionString;
-            SqlConnection cnn;
-            SqlCommand command;
-
-            // your sql user ID, db name and password for connection
-            connetionString = @"Data Source=WIN-50GP30FGO75;Initial Catalog=Demodb;User ID=sa;Password=demol23";
+            // connection string
+            // look [./core/Constants.cs] for connection string and other constants
+            string connetionString = Constants.ConnectionString();
 
             // create a connection to the sql server with 'connectionString' containing ID and password
-            cnn = new SqlConnection(connetionString);
-
-            // define sql command
-            command = new SqlCommand(query, cnn);
+            SqlConnection cnn = new SqlConnection(connetionString);
 
             SqlDataAdapter adapter = new SqlDataAdapter();
 
+            cnn.Open();
+
             switch (dbOperation)
             {
+                // [INSERT]
                 case DBOperation.Insert:
-                    adapter.InsertCommand = new SqlCommand(command.CommandText, cnn);
+                    adapter.InsertCommand = new SqlCommand(query, cnn);
                     adapter.InsertCommand.ExecuteNonQuery();
-                    break;
+                    cnn.Close();
+                    return 0;
+
+                // [SELECT]
                 case DBOperation.Select:
-                    adapter.SelectCommand = new SqlCommand(command.CommandText, cnn);
+                    adapter.SelectCommand = new SqlCommand(query, cnn);
                     adapter.SelectCommand.ExecuteNonQuery();
-                    break;
+                    cnn.Close();
+                    return 20;
+
+                // [UPDATE]
                 case DBOperation.Update:
-                    adapter.UpdateCommand = new SqlCommand(command.CommandText, cnn);
+                    adapter.UpdateCommand = new SqlCommand(query, cnn);
                     adapter.UpdateCommand.ExecuteNonQuery();
-                    break;
+                    cnn.Close();
+                    return 20;
+
+                // [DELETE]
                 case DBOperation.Delete:
-                    adapter.DeleteCommand = new SqlCommand(command.CommandText, cnn);
+                    adapter.DeleteCommand = new SqlCommand(query, cnn);
                     adapter.DeleteCommand.ExecuteNonQuery();
-                    break;
+                    cnn.Close();
+                    return 20;
+
                 default:
                     Console.WriteLine("Invalid operation");
-                    break;
+                    cnn.Close();
+                    return 20;
             }
-
-            cnn.Open();
-            cnn.Close();
         }
     }
 }

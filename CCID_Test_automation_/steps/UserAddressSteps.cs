@@ -1,32 +1,26 @@
-﻿using TechTalk.SpecFlow;
+﻿using CCID_Test_automation_.core;
+using TechTalk.SpecFlow;
 
 namespace CCID_Test_automation_.steps
 {
     [Binding]
     public class UserAddressSteps
     {
-        [Given(@"insert user address to database")]
-        public void GivenTheInsertUserAddressToDatabase()
+
+        [Given(@"insert operation to the database is successful")]
+        public void GivenInsertOperationToTheDatabaseIsSuccessful(Table table)
         {
-            ScenarioContext.Current.Pending();
+            string query = "INSERT INTO DB";
+            // Here the insert opeartion to the database is done
+            DBConnection.ExecuteQuery(DBOperation.Insert, query);
         }
 
-        [When(@"insert to the database is successful")]
-        public void WhenInsertToTheDatabaseIsSuccessful()
+        [Then(@"validate the data is inserted successfully")]
+        public void ThenValidateTheDataIsInsertedSuccessfully(Table table)
         {
-            ScenarioContext.Current.Pending();
-        }
-
-        [Then(@"should get the inserted data from the database")]
-        public void ThenShouldGetTheInsertedDataFromTheDatabase()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
-        [Then(@"should insert ""(.*)"" to database")]
-        public void ThenShouldInsertToDatabase(int p0)
-        {
-            ScenarioContext.Current.Pending();
+            string query = "Select * FROM ";
+            // Here the select opeartion to the database is done
+            DBConnection.ExecuteQuery(DBOperation.Insert, query);
         }
     }
 }
