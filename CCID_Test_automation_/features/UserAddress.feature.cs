@@ -35,7 +35,7 @@ namespace CCID_Test_automation_.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UserAddress", "\tValidate user address insert opeartion in the database", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UserAddress", "\tValidate user address insert operation in the database", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -76,8 +76,8 @@ namespace CCID_Test_automation_.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify user address created")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        [NUnit.Framework.TestCaseAttribute("kiran", "100", null)]
-        public virtual void VerifyUserAddressCreated(string name, string age, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("ADD", "20", "30", "Q", "austin", "austin", "Co", "TX", "20", null)]
+        public virtual void VerifyUserAddressCreated(string action, string customerId, string addressId, string addressType, string addressLine1, string city, string stateCode, string addressCountryCode, string addresspostalCode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "mytag"};
@@ -108,20 +108,48 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Name",
-                            "age"});
+                            "Action",
+                            "CustomerId",
+                            "AddressId",
+                            "AddressType",
+                            "AddressLine1",
+                            "City",
+                            "StateCode",
+                            "AddressCountryCode",
+                            "AddresspostalCode"});
                 table1.AddRow(new string[] {
-                            "kiran",
-                            "100"});
+                            "ADD",
+                            "20",
+                            "30",
+                            "Q",
+                            "austin",
+                            "austin",
+                            "Co",
+                            "TX",
+                            "20"});
 #line 9
  testRunner.Given("insert operation to the database is successful", ((string)(null)), table1, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Name",
-                            "age"});
+                            "Action",
+                            "CustomerId",
+                            "AddressId",
+                            "AddressType",
+                            "AddressLine1",
+                            "City",
+                            "StateCode",
+                            "AddressCountryCode",
+                            "AddresspostalCode"});
                 table2.AddRow(new string[] {
-                            "kiran",
-                            "100"});
+                            "ADD",
+                            "20",
+                            "30",
+                            "Q",
+                            "austin",
+                            "austin",
+                            "Co",
+                            "TX",
+                            "20"});
 #line 13
  testRunner.Then("validate the data is inserted successfully", ((string)(null)), table2, "Then ");
 #line hidden

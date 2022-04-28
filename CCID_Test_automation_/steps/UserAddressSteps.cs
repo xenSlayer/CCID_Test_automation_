@@ -2,33 +2,30 @@
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using System;
+using System.Data.SqlClient;
 
 namespace CCID_Test_automation_.steps
 {
     [Binding]
     public class UserAddressSteps
     {
-
         [Given(@"insert operation to the database is successful")]
         public void GivenInsertOperationToTheDatabaseIsSuccessful(Table table)
         {
-            string query = "INSERT INTO DB";
-            // Here the insert opeartion to the database is done
-            DBConnection.ExecuteQuery(DBOperation.Insert, query);
+
         }
 
         [Then(@"validate the data is inserted successfully")]
         public void ThenValidateTheDataIsInsertedSuccessfully(Table table)
         {
-            string query = "Select * FROM ";
-            // Here the select opeartion to the database is done
-            DBConnection.ExecuteQuery(DBOperation.Select, query);
+            string query = "SELECT * FROM [dbo].[Table] where Id = 2";
 
-            // get the table data
+            string databaseData = DBConnection.ExecuteQuery(query);
+
             dynamic data = table.CreateDynamicInstance();
 
-            // validate the table data
-            Assert.That((string)data.Name == "kiran");
+            Assert.That((string)data.Action == "ADD");
         }
     }
 }

@@ -1,65 +1,40 @@
 ﻿using System.Data.SqlClient;
+using System.Collections.Generic;
 using System;
-
-enum DBOperation
-{
-    Insert,
-    Select,
-    Update,
-    Delete,
-}
+using System.Diagnostics;
+using NUnit.Framework;
 
 namespace CCID_Test_automation_.core
 {
     class DBConnection
     {
-        public static dynamic ExecuteQuery(DBOperation dbOperation, string query)
+        public static string ExecuteQuery(string query)
         {
-            // connection string
-            // ./core/Constants.cs for connection string and other constants
-            string connetionString = Constants.ConnectionString();
+            string connectionString = @"Initial Catalog=kiran; Data Source=localhost;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-            // create a connection to the sql server with 'connectionString' containing ID and password
-            SqlConnection cnn = new SqlConnection(connetionString);
+            using SqlConnection connection = new SqlConnection(connectionString);
 
-            SqlDataAdapter adapter = new SqlDataAdapter();
+            connection.Open();
 
-            cnn.Open();
+            SqlCommand command = new SqlCommand(query, connection);
 
-            switch (dbOperation)
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
             {
-                // [INSERT]
-                case DBOperation.Insert:
-                    adapter.InsertCommand = new SqlCommand(query, cnn);
-                    adapter.InsertCommand.ExecuteNonQuery();
-                    cnn.Close();
-                    return 0;
+                string data = (string)reader.GetValue(reader.GetOrdinal("Action"));
 
-                // [SELECT]
-                case DBOperation.Select:
-                    adapter.SelectCommand = new SqlCommand(query, cnn);
-                    adapter.SelectCommand.ExecuteNonQuery();
-                    cnn.Close();
-                    return 20;
+                connection.Close();
 
-                // [UPDATE]
-                case DBOperation.Update:
-                    adapter.UpdateCommand = new SqlCommand(query, cnn);
-                    adapter.UpdateCommand.ExecuteNonQuery();
-                    cnn.Close();
-                    return 20;
+                TestContext.Progress.WriteLine(data);
 
-                // [DELETE]
-                case DBOperation.Delete:
-                    adapter.DeleteCommand = new SqlCommand(query, cnn);
-                    adapter.DeleteCommand.ExecuteNonQuery();
-                    cnn.Close();
-                    return 20;
+                return data;
 
-                default:
-                    Console.WriteLine("Invalid operation");
-                    cnn.Close();
-                    return 20;
+            }
+            else
+            {
+                TestContext.WriteLine("Unable to fetch any data");
+                return "";
             }
         }
     }
