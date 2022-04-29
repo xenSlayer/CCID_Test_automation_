@@ -1,41 +1,72 @@
 ﻿using System.Data.SqlClient;
+using System.Data;
 using System.Collections.Generic;
-using System;
-using System.Diagnostics;
-using NUnit.Framework;
 
 namespace CCID_Test_automation_.core
 {
     class DBConnection
     {
-        public static string ExecuteQuery(string query)
-        {
-            string connectionString = @"Initial Catalog=kiran; Data Source=localhost;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private readonly string connectionString;
+        SqlConnection connection;
+        SqlDataReader sqlDataReader;
 
-            using SqlConnection connection = new SqlConnection(connectionString);
+        public DBConnection()
+        {
+            connectionString = @"Initial Catalog=kiran; Data Source=localhost;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            LoadConnection();
+        }
+
+        public ConnectionState LoadConnection()
+        {
+            ConnectionState status;
+
+            connection = new SqlConnection(connectionString);
 
             connection.Open();
 
+            status = connection.State;
+
+            return status;
+        }
+
+        public void SelectQuery(string query)
+        {
             SqlCommand command = new SqlCommand(query, connection);
 
-            SqlDataReader reader = command.ExecuteReader();
+            sqlDataReader = command.ExecuteReader();
+            sqlDataReader.Read();
 
-            if (reader.Read())
+        }
+
+        public void ExecuteQuery(string query)
+        {
+            SqlCommand command = new SqlCommand(query, connection);
+            System.Diagnostics.Debug.WriteLine("EXECUTING QUERY: " + query);
+            int _ = command.ExecuteNonQuery();
+        }
+
+        public bool ValidatingInsertedData(Dictionary<string, string> accountData)
+        {
+            bool flag = false;
+
+            foreach (KeyValuePair<string, string> entry in accountData)
             {
-                string data = (string)reader.GetValue(reader.GetOrdinal("Action"));
-
-                connection.Close();
-
-                TestContext.Progress.WriteLine(data);
-
-                return data;
-
+                if (sqlDataReader[entry.Key].ToString() == (entry.Value.ToString()))
+                {
+                    flag = true;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Error in: " + sqlDataReader[entry.Key].ToString());
+                    System.Diagnostics.Debug.WriteLine("[ALERT]: " + sqlDataReader[entry.Key].ToString() + " value from DB is not equal to " + entry.Value.ToString() + " from feature file.");
+                    flag = false;
+                    break;
+                }
             }
-            else
-            {
-                TestContext.WriteLine("Unable to fetch any data");
-                return "";
-            }
+
+            connection.Close();
+
+            return flag;
         }
     }
 }

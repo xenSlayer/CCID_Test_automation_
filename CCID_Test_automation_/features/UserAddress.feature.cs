@@ -76,8 +76,19 @@ namespace CCID_Test_automation_.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify user address created")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        [NUnit.Framework.TestCaseAttribute("ADD", "20", "30", "Q", "austin", "austin", "Co", "TX", "20", null)]
-        public virtual void VerifyUserAddressCreated(string action, string customerId, string addressId, string addressType, string addressLine1, string city, string stateCode, string addressCountryCode, string addresspostalCode, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Action", "ADD", null)]
+        [NUnit.Framework.TestCaseAttribute("ActionDate", "2022-12-12", null)]
+        [NUnit.Framework.TestCaseAttribute("CustomerId", "20", null)]
+        [NUnit.Framework.TestCaseAttribute("AddressId", "30", null)]
+        [NUnit.Framework.TestCaseAttribute("AddressType", "Q", null)]
+        [NUnit.Framework.TestCaseAttribute("AddressLine1", "austin", null)]
+        [NUnit.Framework.TestCaseAttribute("City", "austin", null)]
+        [NUnit.Framework.TestCaseAttribute("StateCode", "CO", null)]
+        [NUnit.Framework.TestCaseAttribute("AddressCountryCode", "TX", null)]
+        [NUnit.Framework.TestCaseAttribute("AddresspostalCode", "20", null)]
+        [NUnit.Framework.TestCaseAttribute("CreatedDate Time", "2022-12-25", null)]
+        [NUnit.Framework.TestCaseAttribute("LastModifiedBy", "System", null)]
+        public virtual void VerifyUserAddressCreated(string columns, string values, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "mytag"};
@@ -107,51 +118,52 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Action",
-                            "CustomerId",
-                            "AddressId",
-                            "AddressType",
-                            "AddressLine1",
-                            "City",
-                            "StateCode",
-                            "AddressCountryCode",
-                            "AddresspostalCode"});
-                table1.AddRow(new string[] {
-                            "ADD",
-                            "20",
-                            "30",
-                            "Q",
-                            "austin",
-                            "austin",
-                            "Co",
-                            "TX",
-                            "20"});
 #line 9
- testRunner.Given("insert operation to the database is successful", ((string)(null)), table1, "Given ");
+ testRunner.Given("Database connection is established", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+#line 10
+ testRunner.When("user inserts \'ADD\' \'20\' \'30\' \'Q\' \'austin\' \'austin\' \'CO\' \'TX\' \'20\' \'System\' operat" +
+                        "ion to the table \'[dbo].[Table]\' is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 11
+ testRunner.Then("User should select inserted data from the table \'[dbo].[Table]\' where customerId " +
+                        "= \'20\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Columns",
+                            "Values"});
+                table1.AddRow(new string[] {
                             "Action",
+                            "ADD"});
+                table1.AddRow(new string[] {
                             "CustomerId",
-                            "AddressId",
-                            "AddressType",
-                            "AddressLine1",
-                            "City",
-                            "StateCode",
-                            "AddressCountryCode",
-                            "AddresspostalCode"});
-                table2.AddRow(new string[] {
-                            "ADD",
-                            "20",
-                            "30",
-                            "Q",
-                            "austin",
-                            "austin",
-                            "Co",
-                            "TX",
                             "20"});
-#line 13
- testRunner.Then("validate the data is inserted successfully", ((string)(null)), table2, "Then ");
+                table1.AddRow(new string[] {
+                            "AddressId",
+                            "30"});
+                table1.AddRow(new string[] {
+                            "AddressType",
+                            "Q"});
+                table1.AddRow(new string[] {
+                            "AddressLine1",
+                            "austin"});
+                table1.AddRow(new string[] {
+                            "City",
+                            "austin"});
+                table1.AddRow(new string[] {
+                            "StateCode",
+                            "CO"});
+                table1.AddRow(new string[] {
+                            "AddressCountryCode",
+                            "TX"});
+                table1.AddRow(new string[] {
+                            "AddresspostalCode",
+                            "20"});
+                table1.AddRow(new string[] {
+                            "LastModifiedBy",
+                            "System"});
+#line 12
+ testRunner.Then("validate the data is inserted successfully", ((string)(null)), table1, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
