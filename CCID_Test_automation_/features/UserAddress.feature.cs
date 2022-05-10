@@ -122,8 +122,8 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("Database connection is established", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 10
- testRunner.When("user inserts \'ADD\' \'20\' \'30\' \'Q\' \'austin\' \'austin\' \'CO\' \'TX\' \'20\' \'System\' operat" +
-                        "ion to the table \'[dbo].[Table]\' is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("user inserts \'ADD\' \'20\' \'30\' \'Q\' \'austin\' \'austin\' \'CO\' \'TX\' \'20\' \'System\' user a" +
+                        "ddress to the table \'[dbo].[Table]\' is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 11
  testRunner.Then("User should select inserted data from the table \'[dbo].[Table]\' where customerId " +
@@ -164,6 +164,77 @@ this.ScenarioInitialize(scenarioInfo);
                             "System"});
 #line 12
  testRunner.Then("validate the data is inserted successfully", ((string)(null)), table1, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Verify data is inserted in Raw FileControlTable")]
+        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.TestCaseAttribute("FileName", "Account_SnapShopt_20.TXT", null)]
+        [NUnit.Framework.TestCaseAttribute("podName", "System", null)]
+        [NUnit.Framework.TestCaseAttribute("IsFileBeingProcessing", "True", null)]
+        [NUnit.Framework.TestCaseAttribute("IsFileProcessingCompleted", "True", null)]
+        public virtual void VerifyDataIsInsertedInRawFileControlTable(string columns, string values, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "mytag"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify data is inserted in Raw FileControlTable", null, @__tags);
+#line 41
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 42
+ testRunner.Given("Database connection is established", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 43
+ testRunner.When("User inserts into Raw FileControlTable \'<fileName>\' \'<podName>\' \'<isFileBeingProc" +
+                        "essing>\' \'<isFileProcessingCompleted>\' data to sql table \'[DBO].[CDAS_RawFileCon" +
+                        "trolTable]\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 44
+ testRunner.Then("User should select inserted data from the table \'[DBO].[CDAS_RawFileControlTable]" +
+                        "\' where FileName \'Account_SnapShopt_20.TXT\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Columns",
+                            "Values"});
+                table2.AddRow(new string[] {
+                            "FileName",
+                            "Account_SnapShopt_20.TXT"});
+                table2.AddRow(new string[] {
+                            "podName",
+                            "System"});
+                table2.AddRow(new string[] {
+                            "IsFileBeingProcessing",
+                            "True"});
+                table2.AddRow(new string[] {
+                            "IsFileProcessingCompleted",
+                            "True"});
+#line 45
+ testRunner.Then("Validate the data is inserted successfully to the table", ((string)(null)), table2, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

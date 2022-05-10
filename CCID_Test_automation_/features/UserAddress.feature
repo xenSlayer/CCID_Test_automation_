@@ -36,3 +36,22 @@ Scenario: Verify user address created
 		| AddresspostalCode  | 20         |
 		| CreatedDate Time   | 2022-12-25 |
 		| LastModifiedBy     | System     |
+
+@mytag
+Scenario: Verify data is inserted in Raw FileControlTable
+	Given Database connection is established
+	When User inserts into Raw FileControlTable '<fileName>' '<podName>' '<isFileBeingProcessing>' '<isFileProcessingCompleted>' data to sql table '[DBO].[CDAS_RawFileControlTable]'
+	Then User should select inserted data from the table '[DBO].[CDAS_RawFileControlTable]' where FileName 'Account_SnapShopt_20.TXT'
+	Then Validate the data is inserted successfully to the table
+		| Columns                   | Values                   |
+		| FileName                  | Account_SnapShopt_20.TXT |
+		| podName                   | System                   |
+		| IsFileBeingProcessing     | True                     |
+		| IsFileProcessingCompleted | True                     |
+
+	Examples:
+		| Columns                   | Values                   |
+		| FileName                  | Account_SnapShopt_20.TXT |
+		| podName                   | System                   |
+		| IsFileBeingProcessing     | True                     |
+		| IsFileProcessingCompleted | True                     |

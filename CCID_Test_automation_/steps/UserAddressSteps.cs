@@ -47,5 +47,39 @@ namespace CCID_Test_automation_.steps
 
             Assert.IsTrue(dBconnection.ValidatingInsertedData(featureFileData));
         }
+
+        // Verify data is inserted in Raw FileControlTable
+
+        [When(@"User inserts into Raw FileControlTable '(.*)' '(.*)' '(.*)' '(.*)' data to sql table '(.*)'")]
+        public void WhenUserInsertsIntoRawFileControlTableDataToSqlTable(string p0, string p1, string p2, string p3, string p4)
+        {
+            string query = "INSERT INTO " + p4 + " (FileName, PodName, IsFileBeingProcessing, IsFileProcessingCompleted) VALUES('" + p0 + "', '" + p1 + "', '" + p2 + "', '" + p3 + "'); ";
+            dBconnection.ExecuteQuery(query);
+        }
+
+
+        [Then(@"User should select inserted data from the table '(.*)' where FileName '(.*)'")]
+        public void ThenUserShouldSelectInsertedDataFromTheTableWhereFileName(string p0, string p1)
+        {
+            string query = "SELECT * FROM " + p0 + " WHERE FileName = " + p1.ToString();
+
+            dBconnection.SelectQuery(query);
+        }
+
+
+
+        [Then(@"Validate the data is inserted successfully to the table")]
+        public void ThenValidateTheDataIsInsertedSuccessfullyToTheTable(Table table)
+        {
+            Dictionary<string, string> featureFileData = new Dictionary<string, string>();
+
+            foreach (TableRow row in table.Rows)
+            {
+                featureFileData.Add(row["Columns"], row["Values"]);
+            }
+
+            Assert.IsTrue(dBconnection.ValidatingInsertedData(featureFileData));
+        }
+
     }
 }
