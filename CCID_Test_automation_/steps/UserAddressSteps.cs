@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using TechTalk.SpecFlow;
+using System;
 
 
 namespace CCID_Test_automation_.steps
@@ -62,7 +63,6 @@ namespace CCID_Test_automation_.steps
         public void ThenUserShouldSelectInsertedDataFromTheTableWhereFileName(string p0, string p1)
         {
             string query = "SELECT * FROM " + p0 + " WHERE FileName = " + p1.ToString();
-
             dBconnection.SelectQuery(query);
         }
 
@@ -70,6 +70,35 @@ namespace CCID_Test_automation_.steps
 
         [Then(@"Validate the data is inserted successfully to the table")]
         public void ThenValidateTheDataIsInsertedSuccessfullyToTheTable(Table table)
+        {
+            Dictionary<string, string> featureFileData = new Dictionary<string, string>();
+
+            foreach (TableRow row in table.Rows)
+            {
+                featureFileData.Add(row["Columns"], row["Values"]);
+            }
+
+            Assert.IsTrue(dBconnection.ValidatingInsertedData(featureFileData));
+        }
+
+        // @RawMasterAndSubAccountRecord
+        [When(@"User inserts '(.*)' '(.*)' '(.*)' '(.*)' '(.*)' '(.*)' '(.*)' '(.*)' '(.*)' '(.*)' '(.*)' data to sql table '(.*)'")]
+        public void WhenUserInsertsDataToSqlTable(string recordId, string action, string subAccountId, string associationCode, string masterAccountId, string accountState, string version, string isvalid, string sysErrorCode, string isProcessed, string lastModifiedBy, string sqlTable)
+        {
+            string dateTime = DateTime.Now.ToString("yyy-MM-dd");
+            string query = $"INSERT INTO {sqlTable} (RecordId, Action, ActionDate, SubAccountId, AccountOpenDate, AssociationCodeDate, AssociationCode, MasterAccountId, AccountState, AccountStateDate, Version, Isvalid, SysErrorCode, IsProcessed, LastModifiedDateTime, LastModifiedBy) VALUES('{recordId}', '{action}', '{dateTime}', '{subAccountId}', '{dateTime}', '{dateTime}', '{associationCode}', '{masterAccountId}', '{accountState}', '{dateTime}', '{version}', '{isvalid}', '{sysErrorCode}', '{isProcessed}', '{dateTime}', '{lastModifiedBy}')";
+            dBconnection.ExecuteQuery(query);
+        }
+
+        [Then(@"User should select inserted data from the table '(.*)' where RecordId is '(.*)'")]
+        public void ThenUserShouldSelectInsertedDataFromTheTableWhereRecordIdIs(string tableName, string recordId)
+        {
+            string query = $"SELECT * FROM {tableName} WHERE RecordId={recordId}";
+            dBconnection.SelectQuery(query);
+        }
+
+        [Then(@"Validate the data is inserted successfully to the table RawMasterAndSubAccountRecord")]
+        public void ThenValidateTheDataIsInsertedSuccessfullyToTheTableRawMasterAndSubAccountRecord(Table table)
         {
             Dictionary<string, string> featureFileData = new Dictionary<string, string>();
 
