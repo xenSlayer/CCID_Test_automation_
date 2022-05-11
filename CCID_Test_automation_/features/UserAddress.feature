@@ -60,7 +60,7 @@ Scenario: Verify data is inserted in Raw FileControlTable
 Scenario: Verify data is inserted in RawMasterAndSubAccountRecord table
 	Given Database connection is established
 	When User inserts '<RecordId>' '<Action>' '<SubAccountId>' '<AssociationCode>' '<MasterAccountId>' '<AccountState>' '<Version>' '<IsValid>' '<SysErrorCode>' '<IsProcessed>' '<LastModifiedBy>' data to sql table '[Dbo].[RawMasterAndSubAccountRecord]'
-	Then User should select inserted data from the table '[Dbo].[RawMasterAndSubAccountRecord]' where RecordId is 'Account_SnapShopt_20.TXT'
+	Then User should select inserted data from the table '[Dbo].[RawMasterAndSubAccountRecord]' where RecordId is '8JK39D9S-943J-9D8V-93JF-390F80FOEJW'
 	Then Validate the data is inserted successfully to the table RawMasterAndSubAccountRecord
 		| Columns         | Values                              |
 		| RecordId        | 8JK39D9S-943J-9D8V-93JF-390F80FOEJW |

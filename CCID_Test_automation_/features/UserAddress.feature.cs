@@ -75,7 +75,7 @@ namespace CCID_Test_automation_.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify user address created")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("UserAddress")]
         [NUnit.Framework.TestCaseAttribute("Action", "ADD", null)]
         [NUnit.Framework.TestCaseAttribute("ActionDate", "2022-12-12", null)]
         [NUnit.Framework.TestCaseAttribute("CustomerId", "20", null)]
@@ -91,7 +91,7 @@ namespace CCID_Test_automation_.Features
         public virtual void VerifyUserAddressCreated(string columns, string values, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "mytag"};
+                    "UserAddress"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -171,7 +171,7 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify data is inserted in Raw FileControlTable")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("fileControlTable")]
         [NUnit.Framework.TestCaseAttribute("FileName", "Account_SnapShopt_20.TXT", null)]
         [NUnit.Framework.TestCaseAttribute("podName", "System", null)]
         [NUnit.Framework.TestCaseAttribute("IsFileBeingProcessing", "True", null)]
@@ -179,7 +179,7 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void VerifyDataIsInsertedInRawFileControlTable(string columns, string values, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "mytag"};
+                    "fileControlTable"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -235,6 +235,107 @@ this.ScenarioInitialize(scenarioInfo);
                             "True"});
 #line 45
  testRunner.Then("Validate the data is inserted successfully to the table", ((string)(null)), table2, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Verify data is inserted in RawMasterAndSubAccountRecord table")]
+        [NUnit.Framework.CategoryAttribute("RawMasterAndSubAccountRecord")]
+        [NUnit.Framework.TestCaseAttribute("RecordId", "8JK39D9S-943J-9D8V-93JF-390F80FOEJW", null)]
+        [NUnit.Framework.TestCaseAttribute("Action", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("SubAccountId", "18805980", null)]
+        [NUnit.Framework.TestCaseAttribute("AssociationCode", "FA", null)]
+        [NUnit.Framework.TestCaseAttribute("MasterAccountId", "09209309", null)]
+        [NUnit.Framework.TestCaseAttribute("AccountState", "O", null)]
+        [NUnit.Framework.TestCaseAttribute("Version", "0", null)]
+        [NUnit.Framework.TestCaseAttribute("IsValid", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("SysErrorCode", "0", null)]
+        [NUnit.Framework.TestCaseAttribute("IsProcessed", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("LastModifiedBy", "System", null)]
+        public virtual void VerifyDataIsInsertedInRawMasterAndSubAccountRecordTable(string columns, string values, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "RawMasterAndSubAccountRecord"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify data is inserted in RawMasterAndSubAccountRecord table", null, @__tags);
+#line 60
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 61
+ testRunner.Given("Database connection is established", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 62
+ testRunner.When("User inserts \'<RecordId>\' \'<Action>\' \'<SubAccountId>\' \'<AssociationCode>\' \'<Maste" +
+                        "rAccountId>\' \'<AccountState>\' \'<Version>\' \'<IsValid>\' \'<SysErrorCode>\' \'<IsProce" +
+                        "ssed>\' \'<LastModifiedBy>\' data to sql table \'[Dbo].[RawMasterAndSubAccountRecord" +
+                        "]\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 63
+ testRunner.Then("User should select inserted data from the table \'[Dbo].[RawMasterAndSubAccountRec" +
+                        "ord]\' where RecordId is \'8JK39D9S-943J-9D8V-93JF-390F80FOEJW\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Columns",
+                            "Values"});
+                table3.AddRow(new string[] {
+                            "RecordId",
+                            "8JK39D9S-943J-9D8V-93JF-390F80FOEJW"});
+                table3.AddRow(new string[] {
+                            "Action",
+                            "1"});
+                table3.AddRow(new string[] {
+                            "SubAccountId",
+                            "18805980"});
+                table3.AddRow(new string[] {
+                            "AssociationCode",
+                            "FA"});
+                table3.AddRow(new string[] {
+                            "MasterAccountId",
+                            "09209309"});
+                table3.AddRow(new string[] {
+                            "AccountState",
+                            "O"});
+                table3.AddRow(new string[] {
+                            "Version",
+                            "0"});
+                table3.AddRow(new string[] {
+                            "IsValid",
+                            "1"});
+                table3.AddRow(new string[] {
+                            "SysErrorCode",
+                            "0"});
+                table3.AddRow(new string[] {
+                            "IsProcessed",
+                            "1"});
+                table3.AddRow(new string[] {
+                            "LastModifiedBy",
+                            "System"});
+#line 64
+ testRunner.Then("Validate the data is inserted successfully to the table RawMasterAndSubAccountRec" +
+                        "ord", ((string)(null)), table3, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
