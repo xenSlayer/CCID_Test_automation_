@@ -1,4 +1,4 @@
-﻿# for validating user address data insert operation to the databases 'kiran' --commit
+﻿# for validating user address data insert operation to the databases 'kiran' --stash
 Feature: UserAddress
 	Validate user address insert operation in the database
 
