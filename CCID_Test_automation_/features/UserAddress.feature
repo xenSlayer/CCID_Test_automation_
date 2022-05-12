@@ -1,4 +1,4 @@
-﻿# for validating user address data insert operation to the database
+﻿# for validating user address data insert operation to the databases
 Feature: UserAddress
 	Validate user address insert operation in the database
 
