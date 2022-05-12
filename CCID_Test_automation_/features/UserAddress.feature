@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
+﻿# for validating user address data insert operation to the databases 'kiran'		--commit
+=======
 ﻿# for validating user address data insert operation to the databases 'kiran' --stash
+>>>>>>> Stashed changes
 Feature: UserAddress
 	Validate user address insert operation in the database
 
