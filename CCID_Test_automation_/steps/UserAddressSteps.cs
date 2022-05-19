@@ -110,5 +110,33 @@ namespace CCID_Test_automation_.steps
             Assert.IsTrue(dBconnection.ValidatingInsertedData(featureFileData));
         }
 
+        // @RawMasterSubTest
+        [When(@"User inserts '(.*)','(.*)','(.*)','(.*)' to table '(.*)'")]
+        public void WhenUserInsertsToTable(string action, string accountID, string associationCode, string masterAccountID, string sqlTable)
+        {
+            string dateTime = DateTime.Now.ToString("yyy-MM-dd");
+            string query = $"INSERT INTO {sqlTable} (Action, ActionDate, AccountID, AssociationCode, MasterAccountID) VALUES('{action}', '{dateTime}', '{accountID}', '{associationCode}', '{masterAccountID}');";
+            dBconnection.ExecuteQuery(query);
+        }
+
+        [Then(@"User should select inserted data from the table '(.*)' where AccountID is '(.*)'")]
+        public void ThenUserShouldSelectInsertedDataFromTheTableWhereAccountIDIs(string tableName, int accountID)
+        {
+            string query = $"SELECT * FROM {tableName} WHERE AccountID={accountID}";
+            dBconnection.SelectQuery(query);
+        }
+
+        [Then(@"Validate the data is inserted successfully to the table RawMasterAndSubTest")]
+        public void ThenValidateTheDataIsInsertedSuccessfullyToTheTableRawMasterAndSubTest(Table table)
+        {
+            Dictionary<string, string> featureFileData = new Dictionary<string, string>();
+
+            foreach (TableRow row in table.Rows)
+            {
+                featureFileData.Add(row["Columns"], row["Values"]);
+            }
+
+            Assert.IsTrue(dBconnection.ValidatingInsertedData(featureFileData));
+        }
     }
 }

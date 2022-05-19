@@ -1,9 +1,4 @@
-<<<<<<< Updated upstream
-﻿# for validating user address data insert operation to the databases 'kiran'		--commit
-=======
-﻿# for validating user address data insert operation to the databases 'kiran' --stash
->>>>>>> Stashed changes
-Feature: UserAddress
+﻿Feature: UserAddress
 	Validate user address insert operation in the database
 
 @UserAddress
@@ -92,3 +87,18 @@ Scenario: Verify data is inserted in RawMasterAndSubAccountRecord table
 		| SysErrorCode    | 0                                   |
 		| IsProcessed     | 1                                   |
 		| LastModifiedBy  | System                              |
+
+@RawMasterSubTest
+Scenario Outline: verify data is inserted in RawMasterSubTest table
+	Given Database connection is established
+	When User inserts '<Action>','<AccountID>','<AssociationCode>','<MasterAccountID>' to table 'CDAS_RawMasterSub_Test'
+	Then User should select inserted data from the table 'CDAS_RawMasterSub_Test' where AccountID is '223611892'
+	Then Validate the data is inserted successfully to the table RawMasterAndSubTest
+		| Columns         | Values    |
+		| Action          | ADD       |
+		| AccountID       | 223611892 |
+		| AssociationCode | FA        |
+		| MasterAccountID | 8005928   |
+        Example:
+		| Action | AccountID | AssociationCode | MasterAccountID |
+		| ADD    | 223611892 | FA              | 8005928         |
